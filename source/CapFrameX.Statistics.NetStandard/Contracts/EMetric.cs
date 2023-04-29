@@ -14,7 +14,7 @@ namespace CapFrameX.Statistics.NetStandard.Contracts
 		[Description("95% percentile")]
 		[ShortDescription("P95")]
 		P95 = 3,
-		[Description("Average")]
+		[Description("Média")]
 		[ShortDescription("Avg")]
 		Average = 4,
 		[Description("Median")]
@@ -32,7 +32,7 @@ namespace CapFrameX.Statistics.NetStandard.Contracts
 		[Description("0.1% percentile")]
 		[ShortDescription("P0.1")]
 		P0dot1 = 9,
-		[Description("1% low average")]
+		[Description("1% Mínimos")]
 		[ShortDescription("1% Low Avg")]
 		OnePercentLowAverage = 10,
 		[Description("0.1% low average")]
@@ -50,7 +50,7 @@ namespace CapFrameX.Statistics.NetStandard.Contracts
 		[Description("Adaptive STDEV")]
 		[ShortDescription("Adp STDEV")]
 		AdaptiveStd = 15,
-		[Description("CPU FPS per 10 Watts")]
+		[Description("CPU FPS por 10 Watts")]
 		[ShortDescription("CPU FPS/10W")]
 		CpuFpsPerWatt = 16,
         [Description("GPU FPS per 10 Watts")]

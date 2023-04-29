@@ -104,6 +104,7 @@ namespace CapFrameX.ViewModel
         private string _selectedChartView = "Frametimes";
         private EFilterMode _selectedFilterMode;
         private string _lShapeYaxisLabel = "Frametimes (ms)" + Environment.NewLine + " ";
+        public Func<double, string> XAxisLabelFormatter { get; set; }
 
         public Array FirstMetricItems => Enum.GetValues(typeof(EMetric))
                                              .Cast<EMetric>().Where(metric => metric != EMetric.None)
@@ -751,6 +752,7 @@ namespace CapFrameX.ViewModel
             SaveFPSPlotAsSVG = new DelegateCommand(() => OnSavePlotAsImage("fps", "svg"));
             SaveFrametimePlotAsPNG = new DelegateCommand(() => OnSavePlotAsImage("frametimes", "png"));
             SaveFPSPlotAsPNG = new DelegateCommand(() => OnSavePlotAsImage("fps", "png"));
+            XAxisLabelFormatter = value => $"{value}";
 
             ComparisonColumnChartFormatter = value => value.ToString(string.Format("F{0}",
             _appConfiguration.FpsValuesRoundingDigits), CultureInfo.InvariantCulture);
@@ -901,7 +903,9 @@ namespace CapFrameX.ViewModel
                     DataLabels = true,
                     MaxRowHeigth = firstRowHeight,
                     RowPadding = 0,
-                    UseRelativeMode = true
+                    UseRelativeMode = true,
+                    FontWeight = FontWeight.FromOpenTypeWeight(400),
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 }
             };
 
@@ -921,7 +925,9 @@ namespace CapFrameX.ViewModel
                     DataLabels = true,
                     MaxRowHeigth = secondRowHeight,
                     RowPadding = 0,
-                    UseRelativeMode = true
+                    UseRelativeMode = true,
+                    FontWeight = FontWeight.FromOpenTypeWeight(400),
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 });
             }
 
