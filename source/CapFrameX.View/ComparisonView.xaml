@@ -66,7 +66,7 @@
                     <TabItem.Header>
                         <Label FontSize="12">Bar charts</Label>
                     </TabItem.Header>
-                    <Grid x:Name="BarGraphsContainer" MaxWidth="800">
+                    <Grid x:Name="BarGraphsContainer" MaxWidth="800" Background="#2d2d2d">
                         <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent">
                             <Grid.LayoutTransform>
                                 <ScaleTransform ScaleX="0.3" ScaleY="0.3" />
@@ -357,6 +357,7 @@
                 <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource MaterialDesignBody}">Custom title:</TextBlock>
                 <ToggleButton x:Name="ShowCustomTitleToggleButton" Margin="10 0 0 0" Style="{StaticResource MaterialDesignSwitchToggleButton}"
 								  ToolTip="Show custom title edit box" IsChecked="{Binding ShowCustomTitle}"/>
+                <Button x:Name="TakeBarGraphPicture" Margin="10 0 0 0" Padding="5 0 5 0" Click="TakeBarGraphPicture_Click">Take Bar Graph Picture</Button>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="10 5 5 5" Orientation="Horizontal"

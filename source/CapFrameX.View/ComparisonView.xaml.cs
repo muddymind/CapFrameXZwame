@@ -1,5 +1,7 @@
 ﻿using CapFrameX.ViewModel;
+using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -7,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace CapFrameX.View
 {
@@ -81,5 +84,48 @@ namespace CapFrameX.View
 			Regex regex = new Regex("[^0-9.-]+");
 			e.Handled = regex.IsMatch(e.Text);
 		}
+
+        private BitmapSource CaptureGridScreenshot(Grid grid)
+        {
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)grid.ActualWidth, (int)grid.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext dc = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(grid);
+                dc.DrawRectangle(vb, null, new Rect(new Point(), new Size(grid.ActualWidth, grid.ActualHeight)));
+            }
+            rtb.Render(dv);
+            return rtb;
+        }
+
+        private void SaveGridScreenshot(BitmapSource gridScreenshot)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PNG Image (*.png)|*.png",
+                FileName = "GridScreenshot",
+                DefaultExt = ".png",
+                AddExtension = true,
+                Title = "Save Grid Screenshot"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                {
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(gridScreenshot));
+                    encoder.Save(fileStream);
+                }
+            }
+        }
+
+
+        private void TakeBarGraphPicture_Click(object sender, RoutedEventArgs e)
+        {
+			var capture = CaptureGridScreenshot(BarGraphsContainer);
+
+			SaveGridScreenshot(capture);
+        }
     }
 }
