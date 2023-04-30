@@ -75,6 +75,10 @@ namespace CapFrameX.ViewModel
                          SensorReport.GetAverageSensorValues(wrappedComparisonRecordInfo.WrappedRecordInfo.Session.Runs.Select(run => run.SensorData2), EReportSensorName.GpuPower,
                          startTime, endTime, _appConfiguration.UseTBPSim));
             }
+            else if(SelectedFirstMetric == EMetric.CpuPowerConsumption)
+            {
+                wrappedComparisonRecordInfo.WrappedRecordInfo.FirstMetric = SensorReport.GetAverageSensorValues(wrappedComparisonRecordInfo.WrappedRecordInfo.Session.Runs.Select(run => run.SensorData2), EReportSensorName.CpuPower, startTime, endTime);
+            }
             else
             {
                 wrappedComparisonRecordInfo.WrappedRecordInfo.FirstMetric
@@ -95,6 +99,10 @@ namespace CapFrameX.ViewModel
                          SensorReport.GetAverageSensorValues(wrappedComparisonRecordInfo.WrappedRecordInfo.Session.Runs.Select(run => run.SensorData2), EReportSensorName.GpuPower,
                          startTime, endTime, _appConfiguration.UseTBPSim));
             }
+            else if (SelectedSecondMetric == EMetric.CpuPowerConsumption)
+            {
+                wrappedComparisonRecordInfo.WrappedRecordInfo.SecondMetric = SensorReport.GetAverageSensorValues(wrappedComparisonRecordInfo.WrappedRecordInfo.Session.Runs.Select(run => run.SensorData2), EReportSensorName.CpuPower, startTime, endTime);
+            }
             else
             {
                 wrappedComparisonRecordInfo.WrappedRecordInfo.SecondMetric
@@ -114,6 +122,10 @@ namespace CapFrameX.ViewModel
                   _frametimeStatisticProvider.GetPhysicalMetricValue(frametimeTimeWindow, EMetric.GpuFpsPerWatt,
                        SensorReport.GetAverageSensorValues(wrappedComparisonRecordInfo.WrappedRecordInfo.Session.Runs.Select(run => run.SensorData2), EReportSensorName.GpuPower,
                        startTime, endTime, _appConfiguration.UseTBPSim));
+            }
+            else if (SelectedThirdMetric == EMetric.CpuPowerConsumption)
+            {
+                wrappedComparisonRecordInfo.WrappedRecordInfo.ThirdMetric = SensorReport.GetAverageSensorValues(wrappedComparisonRecordInfo.WrappedRecordInfo.Session.Runs.Select(run => run.SensorData2), EReportSensorName.CpuPower, startTime, endTime);
             }
             else
             {

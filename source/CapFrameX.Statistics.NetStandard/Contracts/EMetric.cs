@@ -59,5 +59,8 @@ namespace CapFrameX.Statistics.NetStandard.Contracts
         [Description("None")]
 		[ShortDescription("None")]
 		None = 18,
-	}
+        [Description("Consumo médio do CPU em Watts")]
+        [ShortDescription("Cpu Avg Pwr")]
+        CpuPowerConsumption = 19,
+    }
 }

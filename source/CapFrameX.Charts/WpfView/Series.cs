@@ -601,7 +601,15 @@ namespace LiveCharts.Wpf
                 series.Erase(false);
 
             if (series.Model == null) return;
-            series.Model.Chart.Updater.Run();
+            if(series.Model.Chart == null)
+            {
+                series.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                series.Visibility = Visibility.Visible;
+                series.Model.Chart.Updater.Run();
+            }            
         }
 
         private static IChartValues GetValuesForDesigner()

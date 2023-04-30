@@ -39,6 +39,7 @@ using Point = CapFrameX.Statistics.NetStandard.Point;
 using IDropTarget = GongSolutions.Wpf.DragDrop.IDropTarget;
 using DragDropEffects = System.Windows.DragDropEffects;
 using OxyPlot.Legends;
+using System.Diagnostics.Contracts;
 
 namespace CapFrameX.ViewModel
 {
@@ -959,7 +960,8 @@ namespace CapFrameX.ViewModel
                 {
                     Title = GetDescriptionAndFpsUnit(SelectedFirstMetric),
                     Values = new ChartValues<double>(),
-                    Fill = new SolidColorBrush(FirstMetricBarColor)
+                    Fill = new SolidColorBrush(FirstMetricBarColor),
+                    Visibility = (SelectedFirstMetric == EMetric.CpuPowerConsumption || SelectedFirstMetric == EMetric.CpuFpsPerWatt) ? Visibility.Hidden : Visibility.Visible
                     //Fill = new SolidColorBrush(Color.FromRgb(34, 151, 243)),
                 }
             };
@@ -1125,10 +1127,13 @@ namespace CapFrameX.ViewModel
                                  SensorReport.GetAverageSensorValues(currentWrappedComparisonInfo.WrappedRecordInfo.Session.Runs.Select(run => run.SensorData2), EReportSensorName.GpuPower,
                                  startTime, endTime, _appConfiguration.UseTBPSim));
                     }
+                    else if (metric == EMetric.CpuPowerConsumption)
+                    {
+                        metricValue = SensorReport.GetAverageSensorValues(currentWrappedComparisonInfo.WrappedRecordInfo.Session.Runs.Select(run => run.SensorData2), EReportSensorName.CpuPower, startTime, endTime);
+                    }
                     else
                     {
                         metricValue = GetMetricValue(frametimeTimeWindow, metric);
-
                     }
 
                     (ComparisonRowChartSeriesCollection[j] as RowSeries).Title = GetDescriptionAndFpsUnit(metric);

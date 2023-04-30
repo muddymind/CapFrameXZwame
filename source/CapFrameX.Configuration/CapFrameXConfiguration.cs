@@ -593,12 +593,12 @@ namespace CapFrameX.Configuration
 
         public string FirstMetricBarColor
         {
-            get => Get<string>("#b5db38");
+            get => Get<string>("#a0b45f");
             set => Set(value);
         }
         public string SecondMetricBarColor
         {
-            get => Get<string>("#387cdb");
+            get => Get<string>("#5f83b4");
             set => Set(value);
         }
         public string ThirdMetricBarColor
