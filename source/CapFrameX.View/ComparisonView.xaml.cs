@@ -87,7 +87,7 @@ namespace CapFrameX.View
 
         private BitmapSource CaptureGridScreenshot(Grid grid)
         {
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)grid.ActualWidth, (int)grid.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)grid.ActualWidth, (int)grid.ActualHeight-18, 96, 96, PixelFormats.Pbgra32);
             DrawingVisual dv = new DrawingVisual();
             using (DrawingContext dc = dv.RenderOpen())
             {
@@ -103,7 +103,7 @@ namespace CapFrameX.View
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "PNG Image (*.png)|*.png",
-                FileName = "GridScreenshot",
+                FileName = GameNameTextBlock.Text,
                 DefaultExt = ".png",
                 AddExtension = true,
                 Title = "Save Grid Screenshot"

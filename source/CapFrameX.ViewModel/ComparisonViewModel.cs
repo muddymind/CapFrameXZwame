@@ -89,6 +89,7 @@ namespace CapFrameX.ViewModel
         private EComparisonContext _selectedComparisonContext = EComparisonContext.DateTime;
         private EComparisonContext _selectedSecondComparisonContext = EComparisonContext.None;
         private string _currentGameName;
+        private string _currentStatsDescription;
         private bool _hasUniqueGameNames;
         private bool _useComparisonGrouping;
         private bool _useComparisonRelativeMode;
@@ -155,6 +156,18 @@ namespace CapFrameX.ViewModel
                 _selectedFirstMetric = value;
                 RaisePropertyChanged();
                 OnMetricChanged();
+                switch (value)
+                {
+                    case EMetric.CpuPowerConsumption:
+                        CurrentStatsDescription = "Consumo médio [W] (menos é melhor)";
+                        break;
+                    case EMetric.CpuFpsPerWatt:
+                        CurrentStatsDescription = "Eficiencia [FPS/10W] (mais é melhor)";
+                        break;
+                    default:
+                        CurrentStatsDescription = "Desempenho [FPS] (mais é melhor)";
+                        break;
+                }
             }
         }
 
@@ -454,6 +467,16 @@ namespace CapFrameX.ViewModel
             set
             {
                 _currentGameName = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string CurrentStatsDescription
+        {
+            get { return _currentStatsDescription; }
+            set
+            {
+                _currentStatsDescription = value;
                 RaisePropertyChanged();
             }
         }
@@ -1921,7 +1944,7 @@ namespace CapFrameX.ViewModel
                                 labelList.Reverse();
                                 ComparisonRowChartLabels = labelList.ToArray();
                             }
-                        }
+                        }                        
                     }
                 }
             }

@@ -90,20 +90,20 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock DockPanel.Dock="Top" Grid.Row="0" Margin="20 5 0 2" FontWeight="Medium" FontSize="25" Text="{Binding CurrentGameName}" HorizontalAlignment="Left" Height="40"
-							           Visibility="{Binding ShowGameNameTitle, Converter={StaticResource TrueToVisibleConverter}}"/>
+							           Visibility="{Binding ShowGameNameTitle, Converter={StaticResource TrueToVisibleConverter}}" x:Name="GameNameTextBlock"/>
                                 <TextBox DockPanel.Dock="Top" Grid.Row="0" Margin="20 10 0 10" HorizontalAlignment="Left" Visibility="{Binding Path=IsChecked, ElementName=ShowCustomTitleToggleButton, Converter={StaticResource TrueToVisibleConverter}}"
                                          Text="Anno 1800 (4k, Gráficos Máx)" Height="40" MinWidth="50" BorderThickness="0"
                                          FontSize="25" PreviewKeyDown="CustomTitle_PreviewKeyDown" TextDecorations="None" Padding="0 0 0 0" />
 
                                 <!--Bar chart scroll viewer-->
-                                <ScrollViewer VerticalScrollBarVisibility="Disabled" Grid.Row="1">
+                                <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1">
                                     <lvc:CartesianChart Grid.Row="0" VerticalAlignment="Top"  MaxWidth="740" Margin="10 0 0 0" FontSize="14" Series="{Binding ComparisonRowChartSeriesCollection}" 
                                                         Height="{Binding BarChartHeight}" DisableAnimations="True" Hoverable="False"
-											            DataTooltip="{x:Null}" LegendLocation="None"  UseRelativeMode="{Binding UseComparisonRelativeMode, Mode=TwoWay}" Padding="0 0 0 50">
+											            DataTooltip="{x:Null}" LegendLocation="None"  UseRelativeMode="{Binding UseComparisonRelativeMode, Mode=TwoWay}">
                                         <lvc:CartesianChart.AxisX>
-                                            <lvc:Axis MinValue="0" MaxValue="{Binding BarMaxValue}" ShowLabels="True" LabelFormatter="{Binding XAxisLabelFormatter}" FontSize="14">
+                                            <lvc:Axis MinValue="0" MaxValue="{Binding BarMaxValue}" ShowLabels="True" LabelFormatter="{Binding XAxisLabelFormatter}" FontSize="16">
                                                 <lvc:Axis.Separator>
-                                                    <lvc:Separator Step="20" OverridesDefaultStyle="True" Stroke="#404040" StrokeThickness="1" IsEnabled="True" ></lvc:Separator>
+                                                    <lvc:Separator Step="20" OverridesDefaultStyle="True" Stroke="#404040" StrokeThickness="1" IsEnabled="True"></lvc:Separator>
                                                 </lvc:Axis.Separator>
                                             </lvc:Axis>
                                         </lvc:CartesianChart.AxisX>
@@ -117,7 +117,7 @@
                                         </lvc:CartesianChart.AxisY>
                                     </lvc:CartesianChart>
                                 </ScrollViewer>
-                                <TextBox Grid.Row="2" VerticalAlignment="Top" Margin="0 15 0 0" FontWeight="Light" FontSize="18" Text="Desempenho [FPS] (mais é melhor)" BorderThickness="0" HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" VerticalAlignment="Top" Margin="0 15 0 0" FontWeight="Light" FontSize="18" Text="{Binding CurrentStatsDescription}" HorizontalAlignment="Center"/>
                                 <!--Second bar chart with no values just to display the legend of the main bar chart without being inside the scrollviewer-->
                                 <lvc:CartesianChart Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Width="600" MaxWidth="1000" 
                                                     Margin="0 5 0 -20" FontSize="14" 
